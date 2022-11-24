@@ -24,7 +24,7 @@ const LoginPage = () => {
           redirectTo="http://localhost:3000/"
           appearance={{ theme: ThemeSupa }}
           supabaseClient={supabaseClient}
-          providers={["google", "github"]}
+          // providers={["google", "github"]}
           socialLayout="horizontal"
         />
       </div>
