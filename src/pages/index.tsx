@@ -1,3 +1,4 @@
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,6 +7,8 @@ import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
 
   return (
     <>
@@ -44,6 +47,16 @@ const Home: NextPage = () => {
           <p className="text-2xl text-white">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
+          <div className="text-white">
+            <button
+              className="btn btn-primary"
+              onClick={() => supabaseClient.auth.signOut()}
+            >
+              Sign out
+            </button>
+            <p>user:</p>
+            <pre>{JSON.stringify(user, null, 2)}</pre>
+          </div>
         </div>
       </main>
     </>
